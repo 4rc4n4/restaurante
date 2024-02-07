@@ -12,7 +12,9 @@ class SucursalController extends Controller
      */
     public function index()
     {
-        return view('sucursales.index');
+        return view('sucursales.index',[
+            "sucursales" => Sucursal::all()
+        ]);
     }
 
     /**
@@ -28,6 +30,15 @@ class SucursalController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'nombre' => ['required','min:3','max:150'],
+            'domicilio' => ['required','min:3','max:150'],
+            'telefono' => ['required','min:3','max:150'],
+            'email' => ['required','email:rfc,dns','max:150'],
+            'ciudad' => ['required','min:3','max:150'],
+            'estado' => ['required','min:3','max:150'],
+            'pais' => ['required','min:3','max:150']
+        ]);
         $request = request()->only([
             'nombre',
             'domicilio',

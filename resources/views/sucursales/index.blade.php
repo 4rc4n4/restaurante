@@ -87,18 +87,58 @@
 
         <div class="mt-6 bg-white dark:bg-gray-800 shadow-sm rounded-lg dark:divide-gray-900" >
             @foreach ( $sucursales as $sucursal )
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" class="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-            </svg>
-            <div class="flex-1">
-                <div class="flex justify-between items-center">
-                    <div>
-                        <span class="text-gray-800 dark:text-gray-200">nombre</span>
-                        <small class="ml-2 text-sm text-gray-600 dark:text-gray-400">{{$sucursal->created_at}}</small>
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 flex">
+                    <div class="w-6 h-6 flex-shrink-0 mr-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                        </svg>
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex justify-between items-center mb-2">
+                            <div>
+                                <span class="text-gray-800 dark:text-gray-200 font-bold">Nombre</span>
+                            </div>
+                            <div>
+                                <span class="text-gray-800 dark:text-gray-200 font-bold">Domicilio</span>
+                            </div>
+                            <div>
+                                <span class="text-gray-800 dark:text-gray-200 font-bold">Teléfono</span>
+                            </div>
+                            <div>
+                                <span class="text-gray-800 dark:text-gray-200 font-bold">Ciudad</span>
+                            </div>
+                            <div>
+                                <span class="text-gray-800 dark:text-gray-200 font-bold">Estado</span>
+                            </div>
+                            <div>
+                                <span class="text-gray-800 dark:text-gray-200 font-bold">Fecha de Creación</span>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <span class="text-gray-800 dark:text-gray-200">{{$sucursal->nombre}}</span>
+                            </div>
+                            <div>
+                                <small class="ml-2 text-sm text-gray-600 dark:text-gray-400">{{$sucursal->domicilio}}</small>
+                            </div>
+                            <div>
+                                <small class="ml-2 text-sm text-gray-600 dark:text-gray-400">{{$sucursal->telefono}}</small>
+                            </div>
+                            <div>
+                                <small class="ml-2 text-sm text-gray-600 dark:text-gray-400">{{$sucursal->ciudad}}</small>
+                            </div>
+                            <div>
+                                <small class="ml-2 text-sm text-gray-600 dark:text-gray-400">{{$sucursal->estado}}</small>
+                            </div>
+                            <div>
+                                <small class="ml-2 text-sm text-gray-600 dark:text-gray-400">{{$sucursal->created_at}}</small>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <p class="mt-4 text-lg text-gray-900 dark:text-gray-100">{{$sucursal->nombre}}</p>
             </div>
+
 
             @endforeach
 

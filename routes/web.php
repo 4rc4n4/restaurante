@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SucursalController;
+
 
 
 
@@ -13,22 +15,12 @@ Route::get('/', function () {
 Route::middleware('auth')->group(function () {
     Route::view('/dashboard','dashboard')->name('dashboard');
 
-    Route::get('/sucursales', function(){
-        return view('sucursales.index');
-    })->name('sucursales.index');
-    
-    //Route::get('/sucursales/create', function(){
-    //    return view('sucursales.create');
-    //})->name('sucursales.create');
-    Route::post('/sucursales', function(){
-        $nombre = request('nombre');
-        $domicilio = request('domicilio');
-        $telefono = request('telefono');
-        $email = request('email');
-        $ciudad = request('ciudad');
-        $estado = request('estado');
-        $pais = request('pais'); 
-    })->name('sucursales.index');
+    Route::get('/sucursales',[SucursalController::class, 'index'])
+    ->name('Sucursal.index');
+
+    Route::post('/sucursales',[SucursalController::class, 'store'])
+    ->name('Sucursal.store');
+
 
 
 
@@ -38,3 +30,17 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+
+ //Route::get('/sucursales/create', function(){
+    //    return view('sucursales.create');
+    //})->name('sucursales.create');
+    /*
+    $nombre = request('nombre');
+        $domicilio = request('domicilio');
+        $telefono = request('telefono');
+        $email = request('email');
+        $ciudad = request('ciudad');
+        $estado = request('estado');
+        $pais = request('pais');
+    */

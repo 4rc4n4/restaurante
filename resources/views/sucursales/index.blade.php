@@ -9,8 +9,9 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <h2>Alata de sucursales</h2> 
-                    <form method="POST" class="max-w-md mx-auto bg-transparent shadow-md rounded px-8 pt-6 pb-8 mb-4 text-white">
+                    <h2>Alta de sucursales</h2>
+
+                    <form method="POST" action="{{ route('Sucursal.store')}}" class="max-w-md mx-auto bg-transparent shadow-md rounded px-8 pt-6 pb-8 mb-4 text-white">
                         @csrf
                         <div class="mb-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
@@ -74,9 +75,9 @@
                             </x-primary-button>
                         </div>
                     </form>
-                    
-                    
-                    
+
+
+
                 </div>
             </div>
         </div>

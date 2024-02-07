@@ -1,3 +1,7 @@
+@if (session('status'))
+<div class="bg-green-600 text-green-100 text-center text-lg font-bold p-2">Sucursal Creada</div>
+@endif
+
 <nav x-data="{ open: false }" class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -15,7 +19,7 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('sucursales.index')" :active="request()->routeIs('sucursales.index')">
+                    <x-nav-link :href="route('Sucursal.index')" :active="request()->routeIs('sucursales.index')">
                         {{ __('sucursales') }}
                     </x-nav-link>
                 </div>
@@ -73,7 +77,7 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('sucursales.index')" :active="request()->routeIs('sucursales.index')">
+            <x-responsive-nav-link :href="route('Sucursal.index')" :active="request()->routeIs('sucursales.index')">
                 {{ __('Sucursales') }}
             </x-responsive-nav-link>
         </div>

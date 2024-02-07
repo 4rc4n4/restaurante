@@ -12,7 +12,7 @@ class SucursalController extends Controller
      */
     public function index()
     {
-        //
+        return view('sucursales.index');
     }
 
     /**
@@ -28,7 +28,18 @@ class SucursalController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request = request()->only([
+            'nombre',
+            'domicilio',
+            'telefono',
+            'email',
+            'ciudad',
+            'estado',
+            'pais'
+        ]);
+        Sucursal::create($request);
+
+        return to_route('Sucursal.index')->with('status', 'Sucursal creada de manera correctamente');
     }
 
     /**

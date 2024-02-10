@@ -22,6 +22,9 @@
                     <x-nav-link :href="route('Sucursal.index')" :active="request()->routeIs('sucursales.index')">
                         {{ __('sucursales') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('usuarios.index')" :active="request()->routeIs('usuarios.index')">
+                        {{ __('Usuarios') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -80,6 +83,9 @@
             <x-responsive-nav-link :href="route('Sucursal.index')" :active="request()->routeIs('sucursales.index')">
                 {{ __('Sucursales') }}
             </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('usuarios.index')" :active="request()->routeIs('usuarios.index')">
+                {{ __('Usuarios') }}
+            </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->
@@ -97,7 +103,6 @@
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
-
                     <x-responsive-nav-link :href="route('logout')"
                             onclick="event.preventDefault();
                                         this.closest('form').submit();">

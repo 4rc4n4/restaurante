@@ -17,17 +17,15 @@ class SucursalController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
-        //
+        return view('sucursales.index',[
+            "sucursales" => Sucursal::all()
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(Request $request)
     {
         $request->validate([
@@ -38,6 +36,7 @@ class SucursalController extends Controller
             'ciudad' => ['required','min:3','max:150'],
             'estado' => ['required','min:3','max:150'],
             'pais' => ['required','min:3','max:150']
+
         ]);
         $request = request()->only([
             'nombre',
@@ -53,9 +52,7 @@ class SucursalController extends Controller
         return to_route('Sucursal.index')->with('status', 'Sucursal creada de manera correctamente');
     }
 
-    /**
-     * Display the specified resource.
-     */
+
     public function show(Sucursal $sucursal)
     {
         //

@@ -39,6 +39,7 @@
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded" onclick="return confirm('¿Está seguro de eliminar este usuario?')">Eliminar</button>
+
                                         </form>
                                     </div>
                                 </div>

@@ -25,8 +25,9 @@ class PlatilloController extends Controller
      */
     public function create()
     {
-        $sucursales = Sucursal::all(); //obtener sucursael
-        return view('platillos.create', compact('sucursales'));
+        $sucursales = Sucursal::all();
+        $platillo = new Platillo();
+        return view('platillos.create', compact('sucursales', 'platillo'));
     }
 
     /**
@@ -34,7 +35,25 @@ class PlatilloController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $request->validate([
+            'nombre' => 'required|max:255',
+            'descripcion' => 'required',
+            'tiempo_elaboracion' => 'required|integer',
+            'costo_produccion' => 'required|numeric',
+            'precio_venta' => 'required|numeric'
+        ]);
+        $request = request()->only([
+            'nombre',
+            'descripcion',
+            'tiempo_elaboracion',
+            'costo_produccion',
+            'precio_venta'
+        ]);
+
+        Platillo::create($request);
+
+        return redirect()->route('platillos.index')->with('success', 'Platillo creado con éxito.');
     }
 
     /**
@@ -50,7 +69,8 @@ class PlatilloController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $platillo = Platillo::findOrFail($id);
+        return view('platillos.edit', compact('platillo'));
     }
 
     /**
@@ -58,7 +78,19 @@ class PlatilloController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'nombre' => 'required|max:255',
+            'descripcion' => 'required',
+            'tiempo_elaboracion' =>'required|integer',
+            'costo_produccion' =>'required|numeric',
+            'precio_venta' =>'required|numeric'
+
+        ]);
+
+        $platillo = Platillo::findOrFail($id);
+        $platillo->update($request->all());
+
+        return redirect()->route('platillos.index')->with('success', 'Platillo actualizado con éxito.');
     }
 
     /**
@@ -66,6 +98,8 @@ class PlatilloController extends Controller
      */
     public function destroy(string $id)
     {
-        //
-    }
+        $platillo = platillo::findOrFail($id);
+        $platillo->delete();
+        return redirect()->route('platillos.index')->with('success', 'Platillo eliminado con éxito.');
+}
 }

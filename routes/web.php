@@ -17,10 +17,7 @@ Route::middleware('auth')->group(function () {
     Route::view('/dashboard','dashboard')->name('dashboard');
 
     // sucrusales
-    Route::get('/sucursales',[SucursalController::class, 'index'])
-    ->name('Sucursal.index');
-    Route::post('/sucursales',[SucursalController::class, 'store'])
-    ->name('Sucursal.store');
+    Route::resource('sucursales', SucursalController::class);
 
     //usuarios
     Route::get('/usuarios', [UsuarioController::class, 'index'])

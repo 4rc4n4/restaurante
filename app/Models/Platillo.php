@@ -8,12 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Platillo extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'nombre', 'descripcion', 'tiempo_elaboracion', 'costo_produccion', 'precio_venta',
+    ];
 
-    //relacion de platillos con sucursales
-public function sucursales()
-{
-    return $this->belongsToMany(Sucursal::class);
-}
+
 }
 
 

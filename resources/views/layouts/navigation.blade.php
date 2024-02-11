@@ -19,11 +19,14 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('Sucursal.index')" :active="request()->routeIs('sucursales.index')">
-                        {{ __('sucursales') }}
+                    <x-nav-link :href="route('sucursales.index')" :active="request()->routeIs('sucursales.index')">
+                        {{ __('Sucursales') }}
                     </x-nav-link>
                     <x-nav-link :href="route('usuarios.index')" :active="request()->routeIs('usuarios.index')">
                         {{ __('Usuarios') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('platillos.index')" :active="request()->routeIs('platillos.index')">
+                        {{ __('Platillos') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -80,11 +83,14 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('Sucursal.index')" :active="request()->routeIs('sucursales.index')">
+            <x-responsive-nav-link :href="route('sucursales.index')" :active="request()->routeIs('sucursales.index')">
                 {{ __('Sucursales') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('usuarios.index')" :active="request()->routeIs('usuarios.index')">
                 {{ __('Usuarios') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('platillos.index')" :active="request()->routeIs('platillos.index')">
+                {{ __('Platillos') }}
             </x-responsive-nav-link>
         </div>
 

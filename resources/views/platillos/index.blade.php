@@ -34,8 +34,8 @@
                                     </div>
                                     <div class="flex justify-between items-center">
                                         <div>
-                                            <span class="text-gray-800 dark:text-gray-200 font-bold">Costo de Producción:</span>
-                                            <span class="text-gray-800 dark:text-gray-200">${{ number_format($platillo->costo_produccion, 2) }}</span>
+                                            <span class="text-gray-800 dark:text-gray-200 font-bold">Descripcion:</span>
+                                            <span class="text-gray-800 dark:text-gray-200">{{ $platillo->descripcion, 2}}</span>
                                         </div>
                                         <div class="flex justify-end items-center">
                                             <a href="{{ route('platillos.edit', $platillo->id) }}" class="text-sm bg-yellow-500 hover:bg-yellow-700 text-white py-1 px-2 rounded mr-2">Editar</a>

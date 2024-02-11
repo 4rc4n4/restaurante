@@ -12,17 +12,14 @@ class SucursalController extends Controller
      */
     public function index()
     {
-        return view('sucursales.index',[
-            "sucursales" => Sucursal::all()
-        ]);
+        $sucursales = Sucursal::all();
+        return view('sucursales.index', compact('sucursales'));
     }
 
 
     public function create()
     {
-        return view('sucursales.index',[
-            "sucursales" => Sucursal::all()
-        ]);
+        return view('sucursales.create');
     }
 
 
@@ -32,10 +29,11 @@ class SucursalController extends Controller
             'nombre' => ['required','min:3','max:150'],
             'domicilio' => ['required','min:3','max:150'],
             'telefono' => ['required','min:3','max:150'],
-            'email' => ['required','email:rfc,dns','max:150'],
+            'email' => 'required|email|unique:sucursales,email',
             'ciudad' => ['required','min:3','max:150'],
             'estado' => ['required','min:3','max:150'],
-            'pais' => ['required','min:3','max:150']
+            'pais' => ['required','min:3','max:150'],
+            'codigo_postal'=> ['required','min:3','max:150']
 
         ]);
         $request = request()->only([
@@ -45,11 +43,12 @@ class SucursalController extends Controller
             'email',
             'ciudad',
             'estado',
-            'pais'
+            'pais',
+            'codigo_postal'
         ]);
         Sucursal::create($request);
 
-        return to_route('Sucursal.index')->with('status', 'Sucursal creada de manera correctamente');
+        return to_route('sucursales.index')->with('status', 'Sucursal creada de manera correctamente');
     }
 
 
@@ -61,24 +60,45 @@ class SucursalController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Sucursal $sucursal)
+    public function edit(string $id)
     {
-        //
+        $sucursal = Sucursal::findOrFail($id);
+        return view('sucursales.edit', compact('sucursal'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Sucursal $sucursal)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nombre' => ['required','min:3','max:150'],
+            'domicilio' => ['required','min:3','max:150'],
+            'telefono' => ['required','min:3','max:150'],
+            'email' => ['required','email:rfc,dns','max:150'],
+            'ciudad' => ['required','min:3','max:150'],
+            'estado' => ['required','min:3','max:150'],
+            'pais' => ['required','min:3','max:150'],
+            'codigo_postal'=> ['required','min:3','max:150']
+        ]);
+
+        $sucursal = Sucursal::findOrFail($id);
+        $sucursal->update($request->all());
+
+        return redirect()->route('sucursales.index')->with('success', 'Sucursal actualizada con éxito.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Sucursal $sucursal)
+    public function destroy($id)
     {
-        //
+        try {
+            $sucursal = Sucursal::findOrFail($id);
+            $sucursal->delete();
+            return redirect()->route('sucursales.index')->with('success', 'Sucursal eliminada con éxito.');
+        } catch (QueryException $e) {
+            return redirect()->route('sucursales.index')->with('error', 'No se puede eliminar la sucursal porque tiene personal y platillos asignados.');
+        }
     }
 }

@@ -82,10 +82,15 @@ class UsuarioController extends Controller
     {
         $validated = $request->validate([
             'nombre' => 'required|max:255',
-            'email_contacto' => 'required|email|unique:usuarios,email_contacto,' . $id,
+            'domicilio'=> 'required|max:255',
+            'telefono_contacto'=> 'required|max:255',
+            'puesto'=> 'required|max:255',
+            'numero_seguro_social'=> 'required|max:255',
+            'RFC'=> 'required|max:255',
+            'sueldo_diario'=> 'required|max:255',
+            'sucursal_id'=> 'required|max:255'
 
         ]);
-
         $usuario = Usuario::findOrFail($id);
         $usuario->update($validated);
 

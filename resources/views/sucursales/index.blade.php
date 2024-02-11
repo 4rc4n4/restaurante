@@ -9,141 +9,61 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <form method="POST" action="{{ route('Sucursal.store')}}" class="max-w-md mx-auto bg-transparent shadow-md rounded px-8 pt-6 pb-8 mb-4 text-white">
-                        @csrf
-                        <div class="mb-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <div class="mb-4">
-                                <label for="nombre" class="block text-white text-sm font-bold mb-2">Nombre:</label>
-                                <input id="nombre" name="nombre" type="text" placeholder="Ingrese su nombre"
-                                       class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-white text-gray-900" value="{{ old('nombre') }}">
-                                <x-input-error :messages="$errors->get('nombre')" mensaje="El campo nombre es obligatorio" />
-                            </div>
-
-                            <div>
-                                <label class="block text-white text-sm font-bold mb-2" for="domicilio">
-                                    Domicilio
-                                </label>
-                                <input name="domicilio" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-white text-gray-900" id="domicilio" type="text" placeholder="Domicilio" value="{{ old('domicilio') }}">
-                                <x-input-error :messages="$errors->get('domicilio')" mensaje="El campo domicilio es obligatorio" />
-                            </div>
-                        </div>
-                        <div class="mb-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-white text-sm font-bold mb-2" for="telefono">
-                                    Teléfono de contacto
-                                </label>
-                                <input name="telefono" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-white text-gray-900" id="telefono" type="tel" placeholder="Teléfono de contacto" value="{{ old('telefono') }}">
-                                <x-input-error :messages="$errors->get('telefono')" mensaje="El campo teléfono es obligatorio" />
-                            </div>
-                            <div>
-                                <label class="block text-white text-sm font-bold mb-2" for="email">
-                                    Email de contacto
-                                </label>
-                                <input name="email" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-white text-gray-900" id="email" type="email" placeholder="Email de contacto" value="{{ old('email') }}">
-                                <x-input-error :messages="$errors->get('email')" mensaje="El campo email es obligatorio" />
-                            </div>
-                        </div>
-                        <div class="mb-4 grid grid-cols-1 sm:grid-cols-3 gap-4">
-                            <div>
-                                <label class="block text-white text-sm font-bold mb-2" for="ciudad">
-                                    Ciudad
-                                </label>
-                                <input name="ciudad" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-white text-gray-900" id="ciudad" type="text" placeholder="Ciudad" value="{{ old('ciudad') }}">
-                                <x-input-error :messages="$errors->get('ciudad')" mensaje="El campo ciudad es obligatorio" />
-                            </div>
-                            <div>
-                                <label class="block text-white text-sm font-bold mb-2" for="estado">
-                                    Estado
-                                </label>
-                                <input name="estado" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-white text-gray-900" id="estado" type="text" placeholder="Estado" value="{{ old('estado') }}">
-                                <x-input-error :messages="$errors->get('estado')" mensaje="El campo estado es obligatorio" />
-                            </div>
-                            <div>
-                                <label class="block text-white text-sm font-bold mb-2" for="pais">
-                                    País
-                                </label>
-                                <input name="pais" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-white text-gray-900" id="pais" type="text" placeholder="País" value="{{ old('pais') }}">
-                                <x-input-error :messages="$errors->get('pais')" mensaje="El campo país es obligatorio" />
-                            </div>
-                        </div>
-                        <div class="mb-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-white text-sm font-bold mb-2" for="codigo_postal">
-                                    Código Postal
-                                </label>
-                                <input name="codigo_postal" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-white text-gray-900" id="codigo_postal" type="text" placeholder="Código Postal" value="{{ old('codigo_postal') }}">
-                                <x-input-error :messages="$errors->get('codigo_postal')" mensaje="El campo código postal es obligatorio" />
-                            </div>
-                        </div>
-
-                        <div class="flex items-center justify-end">
-                            <x-primary-button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
-                                Guardar
-                            </x-primary-button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-        <div class="mt-6 bg-white dark:bg-gray-800 shadow-sm rounded-lg dark:divide-gray-900" >
-            @foreach ( $sucursales as $sucursal )
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 flex">
-                    <div class="w-6 h-6 flex-shrink-0 mr-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-                        </svg>
+                    <div class="flex justify-end mb-4">
+                        <a href="{{ route('sucursales.create') }}" class="inline-flex items-center px-4 py-2 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 active:bg-blue-900 focus:outline-none focus:border-blue-900 focus:ring focus:ring-blue-300 disabled:opacity-25 transition">
+                            {{ __('Crear Nueva Sucursal') }}
+                        </a>
                     </div>
-                    <div class="flex-1">
-                        <div class="flex justify-between items-center mb-2">
-                            <div>
-                                <span class="text-gray-800 dark:text-gray-200 font-bold">Nombre</span>
-                            </div>
-                            <div>
-                                <span class="text-gray-800 dark:text-gray-200 font-bold">Domicilio</span>
-                            </div>
-                            <div>
-                                <span class="text-gray-800 dark:text-gray-200 font-bold">Teléfono</span>
-                            </div>
-                            <div>
-                                <span class="text-gray-800 dark:text-gray-200 font-bold">Ciudad</span>
-                            </div>
-                            <div>
-                                <span class="text-gray-800 dark:text-gray-200 font-bold">Estado</span>
-                            </div>
-                            <div>
-                                <span class="text-gray-800 dark:text-gray-200 font-bold">Fecha de Creación</span>
-                            </div>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <div>
-                                <span class="text-gray-800 dark:text-gray-200">{{$sucursal->nombre}}</span>
-                            </div>
-                            <div>
-                                <small class="ml-2 text-sm text-gray-600 dark:text-gray-400">{{$sucursal->domicilio}}</small>
-                            </div>
-                            <div>
-                                <small class="ml-2 text-sm text-gray-600 dark:text-gray-400">{{$sucursal->telefono}}</small>
-                            </div>
-                            <div>
-                                <small class="ml-2 text-sm text-gray-600 dark:text-gray-400">{{$sucursal->ciudad}}</small>
-                            </div>
-                            <div>
-                                <small class="ml-2 text-sm text-gray-600 dark:text-gray-400">{{$sucursal->estado}}</small>
-                            </div>
-                            <div>
-                                <small class="ml-2 text-sm text-gray-600 dark:text-gray-400">{{$sucursal->created_at}}</small>
-                            </div>
-                        </div>
+                    <div class="dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                        <table class="min-w-full divide-y divide-gray-800">
+                            <thead class="bg-gray-800">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                                        Nombre
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                                        Domicilio
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                                        Teléfono
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                                        Ciudad
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                                @foreach ($sucursales as $sucursal)
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-white">
+                                            {{ $sucursal->nombre }}
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-white">
+                                            {{ $sucursal->domicilio }}
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-white">
+                                            {{ $sucursal->telefono }}
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-white">
+                                            {{ $sucursal->ciudad }}
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                            <a href="{{ route('sucursales.edit', $sucursal->id) }}" class="text-sm bg-yellow-500 hover:bg-yellow-700 text-white py-1 px-2 rounded mr-2">Editar</a>
+                                            <form action="{{ route('sucursales.destroy', $sucursal->id) }}" method="POST" class="inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded" onclick="return confirm('¿Estás seguro de querer eliminar este platillo?')">Eliminar</button>
+                                            </form>
+                                        </td>
+
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+
                     </div>
                 </div>
             </div>
-
-
-            @endforeach
-
-    </div>
-
         </div>
     </div>
 </x-app-layout>

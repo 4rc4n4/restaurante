@@ -49,6 +49,7 @@
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                             <a href="{{ route('sucursales.edit', $sucursal->id) }}" class="text-sm bg-yellow-500 hover:bg-yellow-700 text-white py-1 px-2 rounded mr-2">Editar</a>
+                                            <a href="{{ route('sucursales.platillos.asignar', $sucursal->id) }}" class="text-sm bg-green-500 hover:bg-green-700 text-white py-1 px-2 rounded mr-2">Asignar Platillos</a>
                                             <form action="{{ route('sucursales.destroy', $sucursal->id) }}" method="POST" class="inline">
                                                 @csrf
                                                 @method('DELETE')

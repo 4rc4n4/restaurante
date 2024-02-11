@@ -12,7 +12,12 @@ class Platillo extends Model
         'nombre', 'descripcion', 'tiempo_elaboracion', 'costo_produccion', 'precio_venta',
     ];
 
+    // relacion platillo con una sucursal
+    public function sucursal()
+    {
+        return $this->belongsToMany(Sucursal::class, 'platillo_sucursal');
 
+    }
 }
 
 

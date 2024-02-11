@@ -29,12 +29,11 @@ class SucursalController extends Controller
             'nombre' => ['required','min:3','max:150'],
             'domicilio' => ['required','min:3','max:150'],
             'telefono' => ['required','min:3','max:150'],
-            'email' => 'required|email|unique:sucursales,email',
+            'email' => ['required','email:rfc,dns','max:150'],
             'ciudad' => ['required','min:3','max:150'],
             'estado' => ['required','min:3','max:150'],
             'pais' => ['required','min:3','max:150'],
             'codigo_postal'=> ['required','min:3','max:150']
-
         ]);
         $request = request()->only([
             'nombre',
@@ -46,11 +45,33 @@ class SucursalController extends Controller
             'pais',
             'codigo_postal'
         ]);
+
         Sucursal::create($request);
 
         return to_route('sucursales.index')->with('status', 'Sucursal creada de manera correctamente');
     }
 
+    // ver platillos en sucursales
+    public function verPlatillos(Request $request)
+    {
+        $sucursales = Sucursal::all();
+        $platillos = collect();
+        $sucursalSeleccionada = null;
+
+        if ($request->has('sucursal_id')) {
+            $sucursalSeleccionada = Sucursal::find($request->sucursal_id);
+        }
+
+        if ($sucursalSeleccionada === null) {
+            $sucursalSeleccionada = $sucursales->first();
+            $platillos = $sucursalSeleccionada->platillos;
+        } else {
+            $platillos = $sucursalSeleccionada->platillos;
+        }
+
+        // Asegúrate de ajustar la ruta a la ubicación correcta de la vista
+        return view('layouts.lista.ver_platillos', compact('sucursales', 'platillos', 'sucursalSeleccionada'));
+    }
 
     public function show(Sucursal $sucursal)
     {

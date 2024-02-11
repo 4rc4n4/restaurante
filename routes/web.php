@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SucursalController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\PlatilloController;
-
+use App\Http\Controllers\SucursalPlatilloController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -36,7 +36,14 @@ Route::middleware('auth')->group(function () {
     //platillos
     Route::resource('platillos', PlatilloController::class);
 
+    // Ruta para mostrar el formulario (método GET)
+    Route::get('/sucursales/{sucursal}/asignar-platillo', [SucursalPlatilloController::class, 'showForm'])->name('sucursales.platillos.form');
 
+    // Ruta para procesar el formulario (método POST)
+    Route::post('/sucursales/{sucursal}/asignar-platillo', [SucursalPlatilloController::class, 'asignarPlatillo'])->name('sucursales.platillos.asignar');
+
+    // ver los platillos de cada sucursal
+    Route::get('/lista/ver-platillos', [SucursalController::class, 'verPlatillos'])->name('lista.ver.platillos');
 
 
 

@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Usuario;
 use App\Models\Sucursal;
+use App\Models\User;
+use App\Models\Role;
 use Illuminate\Http\Request;
 use App\Http\Controllers\SucursalController;
+use Illuminate\Validation\Rule;
 class UsuarioController extends Controller
 {
     /**
@@ -44,7 +47,6 @@ class UsuarioController extends Controller
             'domicilio'=> 'required|max:255',
             'email_contacto' => 'required|email|unique:usuarios,email_contacto',
             'telefono_contacto'=> 'required|max:255',
-            'puesto'=> 'required|max:255',
             'numero_seguro_social'=> 'required|max:255',
             'RFC'=> 'required|max:255',
             'sueldo_diario'=> 'required|max:255',
@@ -67,7 +69,8 @@ class UsuarioController extends Controller
     {
         $usuario = Usuario::findOrFail($id);
         $sucursales = Sucursal::all();
-        return view('usuarios.edit', compact('usuario', 'sucursales'));
+        $roles = Role::all();
+        return view('usuarios.edit', compact('usuario', 'sucursales', 'roles'));
 
     }
 
@@ -80,19 +83,23 @@ class UsuarioController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $usuario = Usuario::findOrFail($id);
         $validated = $request->validate([
             'nombre' => 'required|max:255',
             'domicilio'=> 'required|max:255',
+            'email_contacto' => ['required', 'email', 'max:255', Rule::unique('usuarios', 'email_contacto')->ignore($usuario->id)],
             'telefono_contacto'=> 'required|max:255',
-            'puesto'=> 'required|max:255',
+            'role_id'=> 'required|exists:roles,id',
             'numero_seguro_social'=> 'required|max:255',
             'RFC'=> 'required|max:255',
-            'sueldo_diario'=> 'required|max:255',
-            'sucursal_id'=> 'required|max:255'
-
+            'sueldo_diario'=> 'required|numeric',
+            'sucursal_id'=> 'required|exists:sucursales,id'
         ]);
-        $usuario = Usuario::findOrFail($id);
+
         $usuario->update($validated);
+
+        // Asocia el rol usando role_id directamente
+        $usuario->roles()->sync([$request->role_id]);
 
         return redirect()->route('usuarios.index')->with('success', 'Usuario actualizado con éxito.');
     }

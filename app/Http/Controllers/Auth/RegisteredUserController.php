@@ -1,17 +1,20 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-
+use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Usuario;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\zHash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+
+
 
 class RegisteredUserController extends Controller
 {
@@ -41,6 +44,19 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
+
+        $usuario = new Usuario([
+            'nombre' => $request->name,
+            'email_contacto' => $request->email,
+            'domicilio'=> 'asignar',
+            'telefono_contacto'=> 'asignar',
+            'puesto'=> 'asignar',
+            'numero_seguro_social'=> 'asignar',
+            'RFC'=> 'asignar',
+            'sueldo_diario'=> 0.0,
+            'sucursal_id'=>null
+        ]);
+        $usuario->save();
 
         event(new Registered($user));
 

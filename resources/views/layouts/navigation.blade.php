@@ -28,6 +28,9 @@
                     <x-nav-link :href="route('platillos.index')" :active="request()->routeIs('platillos.index')">
                         {{ __('Platillos') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('lista.ver.platillos')" :active="request()->routeIs('lista.ver.platillos')">
+                        {{ __('Carta') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -91,6 +94,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('platillos.index')" :active="request()->routeIs('platillos.index')">
                 {{ __('Platillos') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('lista.ver.platillos')" :active="request()->routeIs('lista.ver.platillos')">
+                {{ __('Carta') }}
             </x-responsive-nav-link>
         </div>
 

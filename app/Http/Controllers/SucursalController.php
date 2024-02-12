@@ -69,7 +69,6 @@ class SucursalController extends Controller
             $platillos = $sucursalSeleccionada->platillos;
         }
 
-        // Asegúrate de ajustar la ruta a la ubicación correcta de la vista
         return view('layouts.lista.ver_platillos', compact('sucursales', 'platillos', 'sucursalSeleccionada'));
     }
 

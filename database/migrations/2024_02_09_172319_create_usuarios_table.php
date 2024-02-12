@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('numero_seguro_social')->unique();
             $table->string('RFC')->unique();
             $table->decimal('sueldo_diario', 8, 2);
-            $table->foreignId('sucursal_id')->constrained('sucursales');
+            $table->foreignId('sucursal_id')->constrained('sucursales')->nullable();
             $table->timestamps();
         });
     }

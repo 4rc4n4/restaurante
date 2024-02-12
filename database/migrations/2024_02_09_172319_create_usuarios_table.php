@@ -14,13 +14,13 @@ return new class extends Migration
         Schema::create('usuarios', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
-            $table->string('domicilio');
-            $table->string('telefono_contacto');
-            $table->string('email_contacto')->unique();
-            $table->string('puesto');
-            $table->string('numero_seguro_social')->unique();
-            $table->string('RFC')->unique();
-            $table->decimal('sueldo_diario', 8, 2);
+            $table->string('domicilio')->nullable();
+            $table->string('telefono_contacto')->nullable();
+            $table->string('email_contacto')->nullable();
+            $table->string('puesto')->nullable();
+            $table->string('numero_seguro_social')->nullable();
+            $table->string('RFC')->nullable();
+            $table->decimal('sueldo_diario', 8, 2)->nullable();
             $table->foreignId('sucursal_id')->constrained('sucursales')->nullable();
             $table->timestamps();
         });

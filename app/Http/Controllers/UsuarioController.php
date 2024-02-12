@@ -9,6 +9,7 @@ use App\Models\Role;
 use Illuminate\Http\Request;
 use App\Http\Controllers\SucursalController;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\DB;
 class UsuarioController extends Controller
 {
     /**
@@ -96,14 +97,13 @@ class UsuarioController extends Controller
             'sucursal_id'=> 'required|exists:sucursales,id'
         ]);
 
-        $usuario->update($validated);
-
-        // Asocia el rol usando role_id directamente
+        // Buscar el nombre del rol basado en el role_id
+        $rolNombre = Role::findOrFail($request->role_id)->name;
+        $usuario->update(array_merge($validated, ['puesto' => $rolNombre]));
         $usuario->roles()->sync([$request->role_id]);
 
         return redirect()->route('usuarios.index')->with('success', 'Usuario actualizado con éxito.');
     }
-
     /**
      * Remove the specified user from storage.
      *

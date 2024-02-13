@@ -4,7 +4,56 @@
             Ver Platillos por Sucursal
         </h2>
     </x-slot>
+    <style>
 
+
+
+        .overflow-hidden {
+            overflow: hidden;
+        }
+        .shadow-sm {
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        }
+        .sm\:rounded-lg {
+            border-radius: 0.5rem;
+        }
+        label {
+            color: #000000;
+            font-size: 16px;
+            margin-bottom: 0.5rem;
+        }
+        select {
+            display: block;
+            width: 100%;
+            padding: 0.5rem;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 0.375rem;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075);
+        }
+        select:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+
+        table {
+            width: 100%;
+            margin-top: 1rem;
+            border-collapse: collapse;
+        }
+        th, td {
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #ffffff;
+        }
+    </style>
     <div class="py-12">
         <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
@@ -12,7 +61,8 @@
                     <div class="mb-4">
                         <label for="sucursal_id" class="block text-sm font-medium text-white">Seleccione una Sucursal:</label>
                         <div class="relative">
-                            <select name="sucursal_id" id="sucursal_id" class="block appearance-none w-full bg-white border border-gray-300 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:bg-white focus:border-gray-500" onchange="this.form.submit()">
+                            <select name="sucursal_id" id="sucursal_id" class="block appearance-none w-full bg-white border border-gray-300 hover:border-gray-500 px-3 py-1.5 text-sm rounded-md shadow-sm leading-tight focus:outline-none focus:bg-white focus:border-blue-500" onchange="this.form.submit()">
+
                                 @forelse ($sucursales as $sucursal)
                                     <option value="{{ $sucursal->id }}" {{ (request('sucursal_id') == $sucursal->id) ? 'selected' : '' }}>
                                         {{ $sucursal->nombre }}

@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>Don Porfirio</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -14,8 +14,27 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
+    <style>
+        body {
+
+            background-image: url('/images/welcome.png');
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            font-family: 'font-sans', sans-serif;
+        }
+        .content-overlay {
+
+            background-color: rgba(255, 255, 255, 0.5);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+
+
     <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
+        <div class="content-overlay">
             @include('layouts.navigation')
 
             <!-- Page Heading -->
@@ -32,5 +51,6 @@
                 {{ $slot }}
             </main>
         </div>
+
     </body>
 </html>

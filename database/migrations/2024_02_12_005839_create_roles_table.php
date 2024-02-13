@@ -17,10 +17,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        DB::table('roles')->insert([
-            ['name' => 'administrador', 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'mesero', 'created_at' => now(), 'updated_at' => now()],
-        ]);
+
     }
 
     /**

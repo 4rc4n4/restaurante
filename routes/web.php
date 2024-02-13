@@ -6,6 +6,7 @@ use App\Http\Controllers\SucursalController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\PlatilloController;
 use App\Http\Controllers\SucursalPlatilloController;
+use App\Http\Controllers\DashboardController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -14,9 +15,9 @@ Route::get('/', function () {
 
 Route::middleware('auth')->group(function () {
     // pagina principal del proyecto
-    Route::view('/dashboard','dashboard')->name('dashboard');
-
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     // sucrusales
+
     Route::resource('sucursales', SucursalController::class);
 
     //usuarios
@@ -45,13 +46,14 @@ Route::middleware('auth')->group(function () {
     // ver los platillos de cada sucursal
     Route::get('/lista/ver-platillos', [SucursalController::class, 'verPlatillos'])->name('lista.ver.platillos');
 
-
-
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+
+    Route::post('/ventas/realizar', [VentaController::class, 'realizarVenta'])->name('ventas.realizar')->middleware('auth', 'checkrole:mesero');
+
 });
 
 require __DIR__.'/auth.php';
-
 

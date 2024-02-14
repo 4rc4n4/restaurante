@@ -7,6 +7,7 @@ use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\PlatilloController;
 use App\Http\Controllers\SucursalPlatilloController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\VentaController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -15,10 +16,13 @@ Route::get('/', function () {
 
 Route::middleware('auth')->group(function () {
     // pagina principal del proyecto
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    //Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    //Route::post('/dashboard/create', [DashboardController::class, 'realizarVenta'])->name('dashboard.create');
     // sucrusales
-
     Route::resource('sucursales', SucursalController::class);
+    Route::resource('dashboard', DashboardController::class);
+    Route::post('/agregar-pedido', [DashboardController::class, 'agregarPedido'])->name('agregar.pedido');
+
 
     //usuarios
     Route::get('/usuarios', [UsuarioController::class, 'index'])
@@ -51,7 +55,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
 
-    Route::post('/ventas/realizar', [VentaController::class, 'realizarVenta'])->name('ventas.realizar')->middleware('auth', 'checkrole:mesero');
+    Route::post('/venta/realizar', [VentaController::class, 'realizarVenta'])->name('venta.realizar');
+
 
 });
 

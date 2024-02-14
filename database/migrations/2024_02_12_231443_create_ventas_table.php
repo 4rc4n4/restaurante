@@ -19,7 +19,6 @@ return new class extends Migration
             $table->integer('status');//cuando sea 0 es venta abierta,1= cerrada, 2=cancelada
             $table->integer('mesa'); //numero de mesa
             $table->decimal('total',8,2);
-            $table->timestamp();
         });
     }
 

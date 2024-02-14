@@ -15,18 +15,22 @@ class VentaController extends Controller
 {
     public function puntoDeVenta($sucursalId)
     {
+        $usuario = Usuario::find(auth()->id());
         $sucursal = Sucursal::with('platillos')->findOrFail($sucursalId);
+        exit(0);
         $platillos = $sucursal->platillos;
-        return view('ventas.puntov', compact('sucursal', 'platillos'));
+        return view('ventas.puntov', compact('sucursal', 'platillos','usuario'));
     }
 
     public function realizarVenta(Request $request)
     {
         // procesar la venta.
-
+        return "aqui si llego";
         $venta = new Venta();
         $venta->mesero_id = auth()->id();
         $venta->sucursal_id = $request->sucursal_id;
+        $venta->estatus = "";
+        $venta->mesa ="";
         $venta->total = 0; // total despues de sacar cuenta
 
 

@@ -16,6 +16,8 @@ return new class extends Migration
             $table->timestamps();
             $table->foreignId('platillo_id')->constrained()->onDelete('cascade');
             $table->foreignId('venta_id')->constrained()->onDelete('cascade');
+            $table->integer('Usuario_id');
+            $table->integer('cantidad');
             $table->decimal('costo');
         });
     }

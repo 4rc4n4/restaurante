@@ -8,7 +8,7 @@ use App\Http\Controllers\PlatilloController;
 use App\Http\Controllers\SucursalPlatilloController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\VentaController;
-
+use App\Http\Controllers\DetalleVentasController;
 Route::get('/', function () {
     return view('welcome');
 });
@@ -22,6 +22,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('sucursales', SucursalController::class);
     Route::resource('dashboard', DashboardController::class);
     Route::post('/agregar-pedido', [DashboardController::class, 'agregarPedido'])->name('agregar.pedido');
+    Route::post('/detalle-pedido', [DetalleVentasController::class, 'detallePedido'])->name('detalle.pedido');
+    Route::post('/detalle-eliminar', [DetalleVentasController::class, 'destroy'])->name('detalle.destroy');
+    Route::post('/actualventa', [DetalleVentasController::class, 'actualventa'])->name('detalle.actualventa');
 
 
     //usuarios

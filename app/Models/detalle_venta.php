@@ -7,5 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class detalle_venta extends Model
 {
-    use HasFactory;
+    protected $fillable = ['venta_id', 'platillo_id', 'costo','Usuario_id','costo','cantidad'];
+
+
+
+    public function venta()
+    {
+        return $this->belongsTo(Venta::class);
+    }
+
+    public function platillo()
+    {
+        return $this->belongsTo(Platillo::class);
+    }
+
+
 }
+
+

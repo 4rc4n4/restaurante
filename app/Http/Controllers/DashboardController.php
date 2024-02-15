@@ -9,8 +9,8 @@ use App\Models\Role;
 use App\Models\Platillo;
 use App\Models\Sucursal;
 use App\Models\Venta;
-
-
+use App\Http\Controllers\VentaController;
+use App\Http\Controllers\DetalleVentasController;
 class DashboardController extends Controller
 {
 

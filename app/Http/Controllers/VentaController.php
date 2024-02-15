@@ -25,7 +25,7 @@ class VentaController extends Controller
     public function realizarVenta(Request $request)
     {
         // procesar la venta.
-        return "aqui si llego";
+
         $venta = new Venta();
         $venta->mesero_id = auth()->id();
         $venta->sucursal_id = $request->sucursal_id;
